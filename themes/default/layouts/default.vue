@@ -1,4 +1,8 @@
 <template>
+  <div class="frontend">
+    <Toaster></Toaster>
+    <slot></slot>
+  </div>
    
 </template>
 
