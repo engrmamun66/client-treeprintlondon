@@ -1,5 +1,4 @@
 import axios from 'axios'
-import { addController, removeController, cancelAllRequests } from '~/utils/requestManager';
 
 function fullURL(config) {
     return JSON.stringify(config?.params || []);
@@ -15,22 +14,16 @@ function endPoint(config) {
     }
 }
 
-function createApiHandler({accessToken = true, rentmy=false}={}) {
+function createApiHandler({accessToken = false}={}) {
     let options = {
-        baseURL: useRuntimeConfig()?.public?.[rentmy ? 'RENTMY_API_BASE_URL' : 'API_BASE_URL'],
+        baseURL: useRuntimeConfig()?.public?.['API_BASE_URL'],
         timeout: 0
     }
     
     if (accessToken){
-        if(rentmy){
-            options['headers'] = {                
-                authorization: "Bearer" + " " +  useCookie('rentmy_access_token').value ,
-                Location: useCookie("rentmy_location_id").value,
-            }
-        }else{
-            options['headers'] = { authorization: "Bearer" + " " +  useCookie('access_token').value }
-        }
+        authorization: "Bearer" + " " +  useCookie('access_token').value || ''
     }
+
     let api = axios.create(options)
     let loader_timeout = 12000
     api.interceptors.request.use((config) => {
@@ -82,11 +75,14 @@ function createApiHandler({accessToken = true, rentmy=false}={}) {
 }
 
  
-function Api({accessToken=true}={}) {
+function Api() {
+    return createApiHandler({accessToken})
+}
+function ApiAuth({accessToken=true}={}) {
     return createApiHandler({accessToken})
 }
 
  
 
-export { Api, Api2, RentmyApi }
+export { Api, ApiAuth }
 

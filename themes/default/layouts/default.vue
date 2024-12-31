@@ -14,10 +14,6 @@ useHead({
   titleTemplate: "%s",
   script: [
     {
-        id: 'google_map_script',
-        src: `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAP_APIKEY}&libraries=places,drawing,marker&v=weekly`,
-    },
-    {
       src: "/redactor/redactor.js",
     },    
     {
@@ -64,11 +60,10 @@ useHead({
   ],
   link: [
     { rel: "icon", type: "image/x-icon", href: "/img/ionic-favicon.png" },
-    { type: "text/css", rel: "stylesheet", href: "/css/fonts.css" },
     { type: "text/css", rel: "stylesheet", href: "https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" },
-    { type: "text/css", rel: "stylesheet", href: "/css/bootstrap.min.css" },
+    { type: "text/css", rel: "stylesheet", href: "css/bootstrap.min.css" },
     { type: "text/css", rel: "stylesheet", href: "/css/tooltip.css" },
-    { type: "text/css", rel: "stylesheet", href: "/css/frontend.css" },  
+    { type: "text/css", rel: "stylesheet", href: "/css/fontend/module.fontend.css" },  
     { type: "text/css", rel: "stylesheet", href: "/redactor/redactor.min.css" },
   ],
 });
@@ -103,17 +98,7 @@ onMounted(() => {
 
 
 });
-</script>
 
-<style scoped>
-@media screen and (max-width: 700px) {
-  :global(.hide-on-sm) {
-    display: none !important;
-  }
-}
-@media screen and (min-width: 701px) {
-  :global(.hide-up-sm) {
-    display: none !important;
-  }
-}
-</style>
+
+</script>
+ 
