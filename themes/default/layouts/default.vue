@@ -1,13 +1,15 @@
 <template>
   <div class="frontend">
     <Toaster></Toaster>
-    <slot></slot>
+    <Navbar></Navbar>
+    <div class="all-page-contents">
+      <slot></slot>
+    </div>
   </div>
    
 </template>
 
 <script setup> 
-
 
 useHead({
   title: "Ionic Rental",
@@ -60,9 +62,8 @@ useHead({
   ],
   link: [
     { rel: "icon", type: "image/x-icon", href: "/img/ionic-favicon.png" },
-    { type: "text/css", rel: "stylesheet", href: "https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" },
-    { type: "text/css", rel: "stylesheet", href: "css/bootstrap.min.css" },
-    { type: "text/css", rel: "stylesheet", href: "/css/tooltip.css" },
+    { type: "text/css", rel: "stylesheet", href: "https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" }, 
+    { type: "text/css", rel: "stylesheet", href: "https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css" }, 
     { type: "text/css", rel: "stylesheet", href: "/css/fontend/module.fontend.css" },  
     { type: "text/css", rel: "stylesheet", href: "/redactor/redactor.min.css" },
   ],
@@ -77,28 +78,24 @@ useNuxtApp().$on("global_loader", (bool) => {
 });
 
 let audio_player = ref(null);
-onMounted(() => {
-  H.delay(()=> preloader.value = false, 1000 * 8)
-
-  useNuxtApp().$on("play-sound", (sound = "chat") => {
-    let audioNode = audio_player.value;
-    audioNode.volume = 0.8;
-    if (sound == "pop-out") audioNode.src = "/sound/pop-out.mp3";
-    if (sound == "chat") audioNode.src = "/sound/chat.mp3";
-    audioNode?.play().catch((error) => {
-      console.warn("May user didn't interact with the document first");
-      console.error(error);
-    });
-  });
-
-  useNuxtApp().$on('refresh_toaster', (bool) => {
-    toast.value = false;
-    H.delay(()=> toast.value = true, 0)
-  })
+onMounted(() => {  
 
 
 });
 
 
 </script>
+
+
+<style>
+.all-page-contents{
+  margin-top: 70px;
+}
+
+@media screen and (max-width: 767px) {
+  .all-page-contents{
+    margin-bottom: 75px;
+  }
+}
+</style>
  

@@ -440,4 +440,8 @@ h1 {
     transform: scaleX(0);
   }
 }
+.toasts-container .toast {
+  border-radius: 5px; 
+}
+
 </style>
